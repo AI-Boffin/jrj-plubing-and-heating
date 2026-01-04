@@ -1,0 +1,7 @@
+{
+  "name": "JRJ Plumbing & Heating",
+  "description": "Premium plumbing and heating services with an AI-powered assistant for instant quotes and design analysis.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

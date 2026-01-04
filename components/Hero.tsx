@@ -1,0 +1,80 @@
+
+import React from 'react';
+
+const Hero: React.FC = () => {
+  return (
+    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-[#0F172A]">
+      {/* Dynamic Background Elements */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#1e293b] skew-x-[-12deg] translate-x-32 hidden lg:block"></div>
+      <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-jrj-teal/10 blur-[120px] rounded-full"></div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-16 items-center">
+        <div className="text-white">
+          <div className="inline-flex items-center space-x-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-sm">
+            <span className="flex h-2 w-2 rounded-full bg-jrj-teal animate-pulse"></span>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-jrj-teal">Award Winning Engineering</span>
+          </div>
+          
+          <h2 className="font-serif text-6xl md:text-8xl leading-[1.05] mb-8">
+            The Art of <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-jrj-teal to-cyan-200">Modern Comfort.</span>
+          </h2>
+          
+          <p className="text-lg text-slate-400 mb-10 max-w-lg leading-relaxed font-light">
+            Luxury bathroom transformations and precision heating solutions tailored for the sophisticated home. Experience design without compromise.
+          </p>
+          
+          <div className="flex flex-wrap gap-5">
+            <button className="bg-jrj-teal text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-[0_20px_40px_-10px_rgba(70,178,192,0.5)] hover:-translate-y-1 transition-all duration-300">
+              Start Your Design
+            </button>
+            <button className="bg-white/5 border border-white/10 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/10 transition-all">
+              Our Portfolio
+            </button>
+          </div>
+          
+          <div className="mt-16 grid grid-cols-3 gap-8 border-t border-white/10 pt-8 max-w-md">
+            <div>
+              <p className="text-2xl font-serif text-white">15+</p>
+              <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Years Experience</p>
+            </div>
+            <div>
+              <p className="text-2xl font-serif text-white">400+</p>
+              <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Luxury Projects</p>
+            </div>
+            <div>
+              <p className="text-2xl font-serif text-white">24h</p>
+              <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Expert Support</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative lg:block hidden">
+          <div className="relative z-20 rounded-[3rem] overflow-hidden shadow-[0_48px_100px_-24px_rgba(0,0,0,0.5)] animate-float">
+            <img 
+              src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80&w=1000" 
+              alt="Luxury Bathroom Design" 
+              className="w-full h-auto object-cover scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+          </div>
+          
+          {/* Accent Image/Card */}
+          <div className="absolute -bottom-10 -left-10 z-30 bg-white p-6 rounded-[2rem] shadow-2xl max-w-[240px] border border-slate-100">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-10 h-10 bg-jrj-teal/10 rounded-xl flex items-center justify-center text-jrj-teal">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-xs font-bold text-slate-900 uppercase tracking-tight">Eco-Efficiency</p>
+            </div>
+            <p className="text-sm text-slate-600 leading-relaxed font-medium">Smart heating systems that save up to 40% on annual energy costs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

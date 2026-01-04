@@ -1,35 +1,38 @@
-
 import React, { useState, useEffect } from 'react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onNavigate?: (page: 'home' | 'design') => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
+    { name: 'Home', href: '#', action: () => onNavigate?.('home') },
     { name: 'Services', href: '#services' },
     { name: 'Portfolio', href: '#gallery' },
-    { name: 'Sustainability', href: '#eco' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className={`relative flex justify-between items-center transition-all duration-500 ${isScrolled ? 'bg-white/90 backdrop-blur-xl shadow-2xl shadow-slate-900/5 px-8 py-3 rounded-full border border-slate-100' : ''}`}>
-          
-          <div className="flex items-center space-x-3 group cursor-pointer">
-            <div className="w-12 h-12 bg-jrj-teal rounded-2xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500">
-              <span className="text-white font-serif font-extrabold text-2xl">J</span>
-            </div>
-            <div>
-              <h1 className={`text-xl font-serif font-extrabold tracking-tight leading-none transition-colors ${isScrolled ? 'text-slate-900' : 'text-white lg:text-slate-900'}`}>JRJ</h1>
-              <p className="text-[9px] uppercase tracking-[0.3em] text-jrj-teal font-black">Bespoke Design</p>
-            </div>
+
+          <div
+            className="flex items-center space-x-3 group cursor-pointer"
+            onClick={() => onNavigate?.('home')}
+          >
+            <img src="/logo.png" alt="JRJ Plumbing & Heating" className="h-14 w-auto object-contain" />
           </div>
 
           <nav className="hidden lg:flex items-center space-x-12">
@@ -37,62 +40,78 @@ const Header: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className={`text-xs uppercase tracking-widest font-black transition-all hover:text-jrj-teal ${isScrolled ? 'text-slate-600' : 'text-white lg:text-slate-600'}`}
+                onClick={(e) => {
+                  // If it's a hash link (starts with #) and we are provided navigation
+                  if (link.href.startsWith('#') && onNavigate) {
+                    // If we are not already on home (or just to be safe), navigate home.
+                    // We use setTimeout to allow state update if needed, but primarily 
+                    // we want the URL hash to update AND the page view to reset to home.
+                    onNavigate('home');
+
+                    // If we are already on home, the default anchor behavior works.
+                    // If we are on 'design', onNavigate('home') switches the view.
+                    // The browser's default behavior for href="#..." will try to scroll.
+                    // However, the DOM might not differ immediately.
+                    // A safer bet is to let App handling scrolling or use a small timeout.
+                  } else if (link.action) {
+                    e.preventDefault();
+                    link.action();
+                  }
+                }}
+                className={`text-xs uppercase tracking-widest font-black transition-all hover:text-jrj-teal text-slate-600`}
               >
                 {link.name}
               </a>
             ))}
-            <a
-              href="#contact"
-              className="bg-[#0F172A] text-white px-8 py-4 rounded-2xl text-xs uppercase tracking-widest font-black hover:bg-jrj-teal transition-all shadow-xl active:scale-95"
-            >
-              Consultation
-            </a>
           </nav>
 
-          <button 
-            className={`lg:hidden p-2 transition-colors ${isScrolled ? 'text-slate-900' : 'text-white'}`}
+          <div className="hidden lg:block">
+            <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-jrj-teal transition-colors shadow-lg shadow-slate-900/20">
+              Get Quote
+            </button>
+          </div>
+
+          <button
+            className="lg:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 8h16M4 16h16"} />
-            </svg>
+            <div className="w-6 h-5 flex flex-col justify-between">
+              <span className={`w-full h-0.5 bg-slate-800 transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`w-full h-0.5 bg-slate-800 transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`w-full h-0.5 bg-slate-800 transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
+            </div>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#0F172A] z-[60] transition-transform duration-700 lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="p-8 h-full flex flex-col justify-between">
-          <div className="flex justify-between items-center">
-             <div className="w-12 h-12 bg-jrj-teal rounded-2xl flex items-center justify-center">
-              <span className="text-white font-serif font-extrabold text-2xl">J</span>
-            </div>
-            <button onClick={() => setIsMenuOpen(false)} className="text-white">
-               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-          
-          <div className="space-y-12">
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl py-8 px-6 lg:hidden animate-in slide-in-from-top-4">
+          <div className="flex flex-col space-y-6">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="block text-4xl font-serif text-white hover:text-jrj-teal transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  if (link.href.startsWith('#') && onNavigate) {
+                    onNavigate('home');
+                  } else if (link.action) {
+                    e.preventDefault();
+                    link.action();
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className="text-lg font-bold text-slate-900"
               >
                 {link.name}
               </a>
             ))}
+            <button className="bg-jrj-teal text-white px-6 py-3 rounded-xl font-bold uppercase tracking-widest w-full">
+              Get Quote
+            </button>
           </div>
-
-          <button className="w-full bg-jrj-teal text-white py-6 rounded-3xl font-black uppercase tracking-widest">
-            Book Site Visit
-          </button>
         </div>
-      </div>
+      )}
     </header>
   );
 };

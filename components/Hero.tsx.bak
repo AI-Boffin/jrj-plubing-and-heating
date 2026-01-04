@@ -1,14 +1,10 @@
 
 import React from 'react';
 
-interface HeroProps {
-  onStartDesign?: () => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onStartDesign }) => {
+const Hero: React.FC = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* ... (keep background elements) ... */}
+      {/* Dynamic Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-200/50 skew-x-[-12deg] translate-x-32 hidden lg:block"></div>
       <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-jrj-teal/10 blur-[120px] rounded-full"></div>
 
@@ -29,10 +25,7 @@ const Hero: React.FC<HeroProps> = ({ onStartDesign }) => {
           </p>
 
           <div className="flex flex-wrap gap-5">
-            <button
-              onClick={onStartDesign}
-              className="bg-jrj-teal text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-[0_20px_40px_-10px_rgba(70,178,192,0.5)] hover:-translate-y-1 transition-all duration-300"
-            >
+            <button className="bg-jrj-teal text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-[0_20px_40px_-10px_rgba(70,178,192,0.5)] hover:-translate-y-1 transition-all duration-300">
               Start Your Design
             </button>
             <button className="bg-white border border-slate-200 text-slate-900 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all shadow-sm">
@@ -59,7 +52,7 @@ const Hero: React.FC<HeroProps> = ({ onStartDesign }) => {
         <div className="relative lg:block hidden">
           <div className="relative z-20 rounded-[3rem] overflow-hidden shadow-[0_48px_100px_-24px_rgba(0,0,0,0.5)] animate-float">
             <img
-              src="/hero-image.png"
+              src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80&w=1000"
               alt="Luxury Bathroom Design"
               className="w-full h-auto object-cover scale-105"
             />

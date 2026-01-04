@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             className="flex items-center space-x-3 group cursor-pointer"
             onClick={() => onNavigate?.('home')}
           >
-            <img src="/logo.png" alt="JRJ Plumbing & Heating" className="h-14 w-auto object-contain" />
+            <img src="/logo.png" alt="RJR Plumbing & Heating" className="h-14 w-14 object-cover rounded-full" />
           </div>
 
           <nav className="hidden lg:flex items-center space-x-12">

@@ -3,8 +3,8 @@ import { GalleryItem } from '../types';
 
 const GALLERY_DATA: GalleryItem[] = [
   { id: 1, url: '/portfolio/project-1.png', title: 'Marble Sanctuary', category: 'Bathroom Renovation' },
-  { id: 2, url: '/portfolio/project-2.jpg', title: 'Attic Skylight Suite', category: 'Bespoke Design' },
-  { id: 3, url: '/portfolio/project-3.jpg', title: 'Contemporary Wet Room', category: 'Shower Installation' },
+  { id: 2, url: '/portfolio/project-2.png', title: 'Attic Skylight Suite', category: 'Bespoke Design' },
+  { id: 3, url: '/portfolio/project-3.png', title: 'Contemporary Wet Room', category: 'Shower Installation' },
   { id: 4, url: '/portfolio/project-4.png', title: 'Heritage Brass & Green', category: 'Luxury Heritage' },
   { id: 5, url: '/portfolio/project-5.png', title: 'Geometric Tiled Shower', category: 'Tiling & Heating' },
 ];
@@ -33,7 +33,7 @@ const Gallery: React.FC = () => {
               key={item.id}
               onClick={() => setSelectedItem(item)}
               className={`group relative overflow-hidden rounded-3xl cursor-pointer ${idx === 0 ? 'md:col-span-2' :
-                  idx === 3 ? 'md:col-span-2' : ''
+                idx === 3 ? 'md:col-span-2' : ''
                 }`}
             >
               <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/0 transition-colors duration-500 z-10" />
